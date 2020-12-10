@@ -8,7 +8,7 @@ export default class TableContents extends React.Component {
     }
     render() {
         return(
-            <React.Fragment>
+            <div className='cover'>
                 <h1>
                    Contents 
                 </h1>
@@ -22,7 +22,7 @@ export default class TableContents extends React.Component {
                             <React.Fragment>
                                 {(extension === 'jpg' || extension === 'png') &&
                                     <li className='item toc' key={imgUrl}>
-                                        <a href={imgUrl} className='link toc left'>{title}</a>
+                                        <a href={imgUrl} className='toc left'>{title}</a>
                                         <p className='toc right'>{index}</p>
                                     </li>
                                 }
@@ -31,7 +31,7 @@ export default class TableContents extends React.Component {
                     })}
                 </ul>
     
-            </React.Fragment>
+            </div>
         )
     }
 

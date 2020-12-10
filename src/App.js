@@ -1,11 +1,13 @@
 import React from 'react'
 import logo from './logo.svg';
 import './App.css';
-import PageButton from './components/PageButton'
+import Navigation from './components/Navigation'
 import CoverPage from './components/CoverPage'
+import ErrorPage from './components/ErrorPage'
 import TableContents from './components/TableContents'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 import { fetchTopPhotos, get_url_extension } from './utils/api';
+import { FaArrowRight } from 'react-icons/fa';
 
 export default class App extends React.Component {
   state = {
@@ -35,16 +37,15 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="cover">
           <Router>
+            <Navigation/>
               <Switch>
-                <Route exact path='/' component={() => <CoverPage firstPost={this.state.firstPost}/>}/>
-                <Route path='/toc' component={() => <TableContents posts={this.state.posts}/>}/>
-                <Route render={() => <h2>404 Not Found</h2>}/>
+                <Route path='/1' component={() => <CoverPage firstPost={this.state.firstPost}/>}/>
+                <Route path='/2' component={() => <TableContents posts={this.state.posts}/>}/>
+                <Redirect exact from='/' to='/1'/>
+                <Route component={ErrorPage}/>
               </Switch>
           </Router>
-        </div>
-
       </div>
     );
   }

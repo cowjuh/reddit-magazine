@@ -1,5 +1,5 @@
 export function fetchTopPhotos () {
-    const endpoint = window.encodeURI(`https://api.reddit.com/r/aesthetic`)
+    const endpoint = window.encodeURI(`https://api.reddit.com/r/analog`)
 
     return fetch(endpoint)
         .then((res) => res.json())

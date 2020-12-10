@@ -17,7 +17,7 @@ export default function CoverPage({firstPost}) {
                 <a className='link' href={`https://www.reddit.com/user/${author}`}>{author}</a>
             </div>
             <img className='img' src={imgUrl}></img>
-            <h2>{date}</h2>
+            <p className='small-text'>{date}</p>
         </div>
     )  
 }
