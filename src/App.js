@@ -8,7 +8,7 @@ import FeaturePage from './components/FeaturePage'
 import PhotoGrid from './components/PhotoGrid'
 import InputField from './components/InputField'
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
-import { get_url_extension, fetchContent } from './utils/api';
+import { get_url_extension, fetchContent, subredditExists } from './utils/api';
 import PoetryPage from './components/PoetryPage';
 
 export default class App extends React.Component {
@@ -18,7 +18,7 @@ export default class App extends React.Component {
     poems: [],
     firstPoem: {},
     imgSubreddit: 'analog',
-    poemSubreddit: 'OCPoems'
+    poemSubreddit: 'ocpoetry'
   }
   filterByStickied = (arr) => {
     var result = []
@@ -64,9 +64,13 @@ export default class App extends React.Component {
 
   handleSubmit = (id, subreddit) => {
     let newState = Object.assign({}, this.state)
-    {id === 'imgSubreddit' ? newState.imgSubreddit = subreddit : newState.poemSubreddit = subreddit}
-    console.log(newState)
-    this.setState(newState, () => this.updateData())
+    subredditExists(subreddit)
+      .then((res)=> {
+        if(res != 0) {
+          {id === 'imgSubreddit' ? newState.imgSubreddit = subreddit : newState.poemSubreddit = subreddit}
+          this.setState(newState, () => this.updateData())
+        }
+      })
   }
 
   render() {
@@ -76,7 +80,7 @@ export default class App extends React.Component {
           <Router>
             <Navigation/>
              <InputField
-                  label="Images from r/"
+                  fontsize={2}
                   onSubmit={(subReddit) => this.handleSubmit('imgSubreddit', subReddit)}
             />
             <p>{imgSubreddit}</p>
@@ -86,10 +90,6 @@ export default class App extends React.Component {
                   onSubmit={(subReddit) => this.handleSubmit('poemSubreddit', subReddit)}
             />
             <p>{poemSubreddit}</p>
-            {/* {imgSubreddit != 'analog' && poemSubreddit && (
-              <CoverPage firstPost={this.state.firstPost}/>
-            )} */}
-
             
             <Switch>
               <Route path='/1' component={() => <CoverPage firstPost={this.state.firstPost}/>}/>
