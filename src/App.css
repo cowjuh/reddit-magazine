@@ -5,6 +5,16 @@ p, h1, h2, li, a {
 p {
   padding: 0px;
   margin: 0px;
+  font-size: 14px;
+}
+
+p.italic {
+  font-style: italic;
+}
+
+p.vertical {
+  /* writing-mode: vertical-lr;
+  text-orientation: sideways-right; */
 }
 
 h1 {
@@ -16,9 +26,13 @@ h1 {
 }
 
 a {
-  color: black;
+  color: #757575;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-decoration: none;
-  padding: 0;
+}
+
+a.normal {
+  color: black;
 }
 
 li {
@@ -39,17 +53,28 @@ li {
   flex-direction: row;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.container.poetry {
+  max-width: 70%;
+  overflow-y: scroll;
+}
+
+.container.poetry-img {
+  display: flex;
+  flex-direction: row;
+}
+
 .container.toc {
   display: flex;
   max-width: 70%;
+  max-height: 50vh;
   justify-content: start;
   flex-direction: column;
   overflow-y: scroll;
   padding: 0px 15%;
-}
-
-.container.toc::-webkit-scrollbar {
-  display: none;
 }
 
 .item.toc {
@@ -95,8 +120,7 @@ li {
   box-shadow: 2px 4px 8px #cccccc;
   padding: 20px 10px 20px 10px;
   border-radius: 0px 20px 20px 0px;
-  background-image: url("./assets/seamless_paper_texture.png");
-  background-repeat: repeat;
+  background-color: rgb(248, 247, 244);
 }
 
 .subtitle {
@@ -118,10 +142,21 @@ li {
   z-index: 0;
 }
 
+.img.poetry{
+  width: 50vh;
+  height: 20vh;
+  border-radius: 10px;
+}
+
 .the-list {
   /* background-color: burlywood; */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0;
+}
+
+.html-container {
+  overflow: wrap;
+  text-overflow: wrap;
 }
