@@ -1,6 +1,7 @@
 import React from 'react'
 import {FaArrowRight, FaArrowLeft, FaRedoAlt} from 'react-icons/fa'
 import {Link, useLocation} from 'react-router-dom'
+import InputField from './InputField'
 
 export default function Navigation() {
     const location = useLocation()
@@ -10,6 +11,10 @@ export default function Navigation() {
     var next
     current === 1? prev = 1: prev = current - 1
     current === 9? next = 1: next = current + 1
+    
+    function handleSubmit(id, subReddit) {
+        console.log(subReddit)
+    }
 
     return(
         <div className='flex-row'>
