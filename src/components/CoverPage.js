@@ -11,13 +11,13 @@ export default function CoverPage({firstPost}) {
     console.log(firstPost)
     return(
         <div className='cover'>
+            <p className='small-text'>{date}</p>
             <h1>ANALOG</h1>
-            <a className='normal' href={`https://www.reddit.com/${permalink}`}><p>{title}</p></a>
             <div class='subtitle'>
                 <a className='link normal' href={`https://www.reddit.com/user/${author}`}>{author}</a>
             </div>
             <img className='img' src={imgUrl}></img>
-            <p className='small-text'>{date}</p>
+            <a className='normal' href={`https://www.reddit.com/${permalink}`}><p>{title}</p></a>
         </div>
     )  
 }

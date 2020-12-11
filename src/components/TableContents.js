@@ -30,7 +30,6 @@ export default class TableContents extends React.Component {
                         )
                     })}
                 </ul>
-    
             </div>
         )
     }

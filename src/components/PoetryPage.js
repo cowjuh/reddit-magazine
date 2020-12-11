@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 
-export default function PoetryPage({post, poem}) {
+export default function PoetryPage(props) {
     function decodeHtml(html) {
         var txt = document.createElement("textarea");
         txt.innerHTML = html;
@@ -14,21 +14,21 @@ export default function PoetryPage({post, poem}) {
         textOverflow: "ellipsis"
     };
 
-    console.log("hellllllloooo", poem)
-    const poemTitle = poem.title
-    const poemAuthor = poem.author
-    const poemContent = decodeHtml(poem.selftext_html)
-    const poemID = poem.id
-    const imgTitle = post.title
-    const imgUrl = post.url
+    const {posts, poems, num} = props
+    const poemTitle = poems[num].data.title
+    const poemAuthor = poems[num].data.author
+    const poemContent = decodeHtml(poems[num].data.selftext_html)
+    const poemID = poems[num].data.id
+    const imgTitle = posts[num].data.title
+    const imgUrl = posts[num].data.url
 
     return(
-        <div className='cover page'>
+        <div className='cover page poetry'>
             <div className='container poetry'>
-                <div className='container poetry-img'>
+                <a className='container poetry-img' href={imgUrl}>
                     <img className='img poetry' src={imgUrl}/>
-                    <p className='vertical'>{imgTitle}</p>
-                </div>
+                    <p className='caption'>{imgTitle}</p>
+                </a>
                 <h3>{poemTitle}</h3>
                 <div className='html-container'>
                     <div style={htmlStyle} dangerouslySetInnerHTML={{__html: poemContent}}/>

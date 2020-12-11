@@ -1,5 +1,5 @@
 export function fetchTopPhotos () {
-    const endpoint = window.encodeURI(`https://api.reddit.com/r/analog/.json?limit=100`)
+    const endpoint = window.encodeURI(`https://api.reddit.com/r/analog/.json?limit=40`)
 
     return fetch(endpoint)
         .then((res) => res.json())
