@@ -2,7 +2,8 @@ import React from 'react'
 
 export default class InputField extends React.Component {
     state = {
-        value: this.props.value
+        value: this.props.value,
+        type: this.props.type
     }
     handleChange = (event) => {
         this.setState({
@@ -11,12 +12,12 @@ export default class InputField extends React.Component {
     }
     handleSubmit = (event) => {
         event.preventDefault()
-        this.props.onSubmit(this.state.value)
+        this.props.handleSubmit(this.state.type, this.state.value)
     }
     
     render() {
         const textStyle = {
-            fontSize: `${this.props.fontSize}vh`,
+            fontSize: `${this.props.fontSize}%`,
             fontWeight: this.props.fontWeight,
             textTransform: this.props.textTransform,
             textAlign: 'center',

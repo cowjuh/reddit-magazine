@@ -18,7 +18,8 @@ export default class App extends React.Component {
     poems: [],
     firstPoem: {},
     imgSubreddit: 'analog',
-    poemSubreddit: 'ocpoetry'
+    poemSubreddit: 'ocpoetry',
+    curPage: 1,
   }
   filterByStickied = (arr) => {
     var result = []
@@ -29,7 +30,6 @@ export default class App extends React.Component {
     }
     return result
   }
-
   filterByFileType = (arr) => {
     var result = []
     for(const element in arr) {
@@ -39,7 +39,6 @@ export default class App extends React.Component {
     }
     return result
   }
-
   updateData = () => {
     fetchContent(this.state.imgSubreddit)
       .then((res) => {
@@ -61,7 +60,13 @@ export default class App extends React.Component {
   componentDidMount() {
     this.updateData()
   }
-
+  handlePageTurn = (newPage) => {
+    if(newPage != this.state.curPage) {
+      this.setState({
+        curPage: newPage
+      })
+    }
+  }
   handleSubmit = (id, subreddit) => {
     let newState = Object.assign({}, this.state)
     subredditExists(subreddit)
@@ -78,30 +83,22 @@ export default class App extends React.Component {
     return (
       <div className="App">
           <Router>
-            <Navigation/>
-             <InputField
-                  fontsize={2}
-                  onSubmit={(subReddit) => this.handleSubmit('imgSubreddit', subReddit)}
-            />
-            <p>{imgSubreddit}</p>
-
-            <InputField
-                  label="Text from r/"
-                  onSubmit={(subReddit) => this.handleSubmit('poemSubreddit', subReddit)}
-            />
-            <p>{poemSubreddit}</p>
-            
+            <Navigation curPage={this.state.curPage} handlePageTurn={this.handlePageTurn}/>
             <Switch>
-              <Route path='/1' component={() => <CoverPage firstPost={this.state.firstPost}/>}/>
+              <Route path='/1' component={() => <CoverPage num={0} posts={this.state.posts} firstPost={this.state.firstPost} handleSubmit={this.handleSubmit}/>}/>
               <Route path='/2' component={() => <TableContents posts={this.state.posts}/>}/>
               <Route path='/3' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={2}/>}/>
               <Route path='/4' component={() => <FeaturePage posts={this.state.posts} num={6}/>}/>
-              <Route path='/5' component={() => <PhotoGrid posts={this.state.posts} num={7}/>}/>
+              <Route path='/5' component={() => <FeaturePage posts={this.state.posts} num={7}/>}/>
               <Route path='/6' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={8}/>}/>
               <Route path='/7' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={9}/>}/>
               <Route path='/8' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={10}/>}/>
-              <Route path='/9' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={11}/>}/>
-              <Redirect exact from='/' to='/1'/>
+              <Route path='/9' component={() => <FeaturePage posts={this.state.posts} num={11}/>}/>
+              <Route path='/10' component={() => <FeaturePage posts={this.state.posts} num={12}/>}/>
+              <Route path='/11' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={13}/>}/>
+              <Route path='/12' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={14}/>}/>
+              <Route path='/13' component={() => <PoetryPage posts={this.state.posts} poems={this.state.poems} num={15}/>}/>
+              <Redirect exact="true" from='/' to='/1'/>
               <Route component={ErrorPage}/>
             </Switch>
           </Router>

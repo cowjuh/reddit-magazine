@@ -31,7 +31,6 @@ h1.title {
 
 a {
   color: #757575;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-decoration: none;
 }
 
@@ -155,7 +154,6 @@ input:focus {
 
 .App {
   display: flex;
-  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -237,7 +235,6 @@ input:focus {
 
 .img.feature {
   object-fit: contain;
-  height: auto;
   margin-bottom: 10px;
   border-radius: 3px;
 }
