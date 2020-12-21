@@ -4,17 +4,17 @@ import {Link, useLocation} from 'react-router-dom'
 import InputField from './InputField'
 
 export default function Navigation(props) {
-    const curPage = props.curPage
     const handlePageTurn = props.handlePageTurn
     const location = useLocation()
-    const path = location.pathname
+    const curPage = Number(location.pathname.substring(1))
+    const numPages = 13
     var prev, next
     if(curPage === 1){
-        prev = 20
+        prev = numPages
     } else {
         prev = curPage - 1
     }
-    if(curPage === 20){
+    if(curPage === numPages){
         next = 1
     } else {
         next = curPage + 1

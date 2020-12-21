@@ -7,36 +7,31 @@ export default function PoetryPage(props) {
         txt.innerHTML = html;
         return txt.value;
     }
-
     const htmlStyle = {
         color: 'black',
         maxWidth: '100%',
         textOverflow: "ellipsis"
     };
-
     const {posts, poems, num} = props
-    const poemTitle = poems[num].data.title
-    const poemAuthor = poems[num].data.author
-    const poemContent = decodeHtml(poems[num].data.selftext_html)
-    const poemID = poems[num].data.id
-    const imgTitle = posts[num].data.title
-    const imgUrl = posts[num].data.url
-
     return(
         <div className='cover page poetry'>
             <div className='container poetry'>
-                <a className='container poetry-img' href={imgUrl}>
-                    <img className='img poetry' src={imgUrl}/>
-                    <p className='caption'>{imgTitle}</p>
-                </a>
-                <h3>{poemTitle}</h3>
-                <div className='html-container'>
-                    <div style={htmlStyle} dangerouslySetInnerHTML={{__html: poemContent}}/>
-                </div>
-                <a href={`https://www.reddit.com/user/${poemAuthor}`}>
-                    <p className='italic'>Written by {poemAuthor}</p>
-                </a>
-                
+                {!posts[0] || !poems[0]
+                ? <p>Loading...</p>
+                : <React.Fragment>
+                    <a className='container poetry-img' href={posts[num].data.url}>
+                        <img className='img poetry' src={posts[num].data.url}/>
+                        <p className='caption'>{posts[num].data.title}</p>
+                    </a>
+                    <h3>{poems[num].data.title}</h3>
+                    <div className='html-container'>
+                        <div style={htmlStyle} dangerouslySetInnerHTML={{__html: decodeHtml(poems[num].data.selftext_html)}}/>
+                    </div>
+                    <a href={`https://www.reddit.com/user/${poems[num].data.author}`}>
+                        <p className='italic'>Written by {poems[num].data.author}</p>
+                    </a>
+                </React.Fragment>
+                }
             </div>
         </div>
     )

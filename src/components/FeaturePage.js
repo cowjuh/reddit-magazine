@@ -3,17 +3,16 @@ import '../App.css'
 
 export default function FeaturePage(props) {
     const {posts, num} = props
-    const author = posts[num].data.author
-    const title = posts[num].data.title
-    const imgUrl = posts[num].data.url
-    const votes = posts[num].data.ups
     return(
         <div className='cover page'>
-            <div className='container feature'>
-                <img className='img feature' src={imgUrl}></img>
-                <p>{title} | {votes} Upvotes</p>
-                <a className='normal' href={`https://www.reddit.com/user/${author}`}>by {author}</a>
-            </div>
+            {!posts[0]
+                ? <p>Loading...</p>
+                : <div className='container feature'>
+                <img className='img feature' src={posts[num].data.url}></img>
+                <p>{posts[num].data.title} | {posts[num].data.ups} Upvotes</p>
+                <a className='normal' href={`https://www.reddit.com/user/${posts[num].data.author}`}>by {posts[num].data.author}</a>
+                </div>
+            }
         </div>
     )
 

@@ -1,15 +1,13 @@
 import React from 'react'
-import './App.css';
+import './App.css'
 import Navigation from './components/Navigation'
 import CoverPage from './components/CoverPage'
 import ErrorPage from './components/ErrorPage'
 import TableContents from './components/TableContents'
 import FeaturePage from './components/FeaturePage'
-import PhotoGrid from './components/PhotoGrid'
-import InputField from './components/InputField'
-import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
-import { get_url_extension, fetchContent, subredditExists } from './utils/api';
-import PoetryPage from './components/PoetryPage';
+import {BrowserRouter as Router, Redirect, Route, Switch, useLocation} from 'react-router-dom'
+import { get_url_extension, fetchContent, subredditExists } from './utils/api'
+import PoetryPage from './components/PoetryPage'
 
 export default class App extends React.Component {
   state = {
@@ -21,6 +19,7 @@ export default class App extends React.Component {
     poemSubreddit: 'ocpoetry',
     curPage: 1,
   }
+
   filterByStickied = (arr) => {
     var result = []
     for(const element in arr) {
@@ -30,6 +29,7 @@ export default class App extends React.Component {
     }
     return result
   }
+
   filterByFileType = (arr) => {
     var result = []
     for(const element in arr) {
@@ -39,6 +39,7 @@ export default class App extends React.Component {
     }
     return result
   }
+
   updateData = () => {
     fetchContent(this.state.imgSubreddit)
       .then((res) => {
@@ -57,9 +58,11 @@ export default class App extends React.Component {
         })
       })
   }
+
   componentDidMount() {
     this.updateData()
   }
+
   handlePageTurn = (newPage) => {
     if(newPage != this.state.curPage) {
       this.setState({
