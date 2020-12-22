@@ -4,3 +4,4 @@ Personal, procrastinating-for-finals project to practice React and play around w
 You can see it live here: https://reddit-magazine.netlify.app/
 
 Background tiling comes from: https://www.toptal.com/designers/subtlepatterns/
+Colour Palette Generation: https://docs.imgix.com/apis/rendering/color-palette/palette
